@@ -4,15 +4,6 @@
 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Raleway:300,400,400i,500,500i,700,800,900" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
-  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="assets/vendor/nivo-slider/css/nivo-slider.css" rel="stylesheet">
-  <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-  <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
-
    <!-- Template Main CSS File -->
    <link href="css/style_onlne_order.css" rel="stylesheet">
 
@@ -29,7 +20,84 @@
         <!-- Main Style Css -->
             <link href="assets/css/style_order_online.css" rel="stylesheet">
            <link href="assets/css/style.css" rel="stylesheet">
-             
+            
+           
+
+<!-- Javascipt changes which handles the time format as per delivery-->
+<script language="javascript" type="text/javascript">
+  function disdate()
+  {
+  var today = new Date(); 
+  var hours = today.getHours();
+  var min = today.getMinutes();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; 
+  var yyyy = today.getFullYear();
+  if(dd<10) 
+  {
+      dd='0'+dd;
+  } 
+  
+  if(mm<10) 
+  {
+      mm='0'+mm;
+  } 
+  today = yyyy+'-'+mm+'-'+dd;
+  
+  ordertime = hours+''+min;
+  
+  
+  var form = document.getElementById('orderform');
+  var dateenter = form.elements.startdate.value;
+  
+  if(dateenter == today){
+  if (ordertime < "07"){
+  //alert('1');    //document.getElementById("r2").checked = true;
+     // document.getElementById("r3").checked = true;
+     // document.getElementById("r1").checked = true;
+  } else if (hours >= "07" && hours < "10") {
+    //  alert('2');
+      document.getElementById("r1").disabled = true;
+      //document.getElementById("r2").checked = true;
+      //document.getElementById("r3").checked = true;
+  } else if (hours >= "10" && hours < "16") {
+  //  alert('3');
+      document.getElementById("r1").disabled = true;
+      document.getElementById("r2").disabled = true;
+      //document.getElementById("r3").checked = true;
+  }
+  else if (hours >= "16") {
+    //  alert('4');
+     document.getElementById("r1").disabled = true;
+      document.getElementById("r2").disabled = true;
+      document.getElementById("r3").disabled = true;
+  }
+  }
+  else if (dateenter != today){
+      document.getElementById("r1").disabled = false;
+      document.getElementById("r2").disabled = false;
+      document.getElementById("r3").disabled = false; 
+  }
+  }
+  </script>
+<script type="text/javascript">
+  function checkForm(form) // Submit button clicked
+  {
+    //
+    // check form input values
+    //
+
+    form.myButton.disabled = true;
+    form.myButton.value = "Please wait...";
+    return true;
+  }
+</script>
+
+<script type="text/javascript">
+    function submitClick() {
+      alert("Thank you for your time! Your details have been submitted!");
+     }
+</script>
     </head>
 
     <body class="form-v4" data-spy="scroll" data-target="#navbar-example">
@@ -101,33 +169,50 @@
                                           <input type="text" name="entry.1884208436" value="" placeholder="Your Pin Code" class="input-text" required>
                                       </div>
       
-      
-                                     
-      
-                                     
-
-
-
-
-
-
-
-     
-
-
-
-      
-                            
                                       <div class="form-row">
-                                 <input type="submit" name="myButton" class="theme-btn btn-style-one" onclick="disdate(); return confirm('Kindly press Ok to submit order and please wait for the confirmation page.')" value="Place Order"></button>
-                             </div>
+                                        <label for="delivery_date">Delivery date </label><br>
+                                         <input type="date" id="startdate" name="entry.1885940400" id="mydate"
+                                           min="2020-03-01" max="2020-12-31" class="input-text" required>
+                                         </div>
+                                     
+                                         <div class="form-group">
+                   <div class="form-row form-row-1">
+                                         <label for="radio-01">Delivery time</label>
+         </div>
+         
+                   <div class="form-row form-row-1 ">
+                                             <input name="entry.1359905200" id="r1" type="radio"  value = "9 AM - 10 AM" required/> 9 - 10 AM 
+         </div>
+         
+                   <div class="form-row form-row-1 ">
+         
+                                             <input name="entry.1359905200" id= "r2" type="radio"  value = "1 PM - 2 PM" required /> 12 - 1 PM 
+         </div>
+                   <div class="form-row form-row-1 ">
+                                             <input name="entry.1359905200" id = "r3" type="radio"  value = "6 PM - 7 PM" required/> 6 - 7 PM </br>
+         </div>
+         <input type="hidden" name="entry.1359905200"/>
+          </div>
       
-            </form></div></div>
-          
-      
-      
-      
-      
+                                     
+          <script type="text/javascript">
+            myVar = setInterval(disdate, 30);
+        </script> 
+        </br>
+                                         
+                                        <div class="form-row-1">
+         <label for="order_details" >Order Details</label>
+                                     
+                                            <textarea cols="40" rows="10" name="entry.1310886848" placeholder="Order Details(If multiple orders to be placed enter the details leaving one line after each order)" class="input-text"  required></textarea>
+                                        </div>
+        
+                              
+                                        <div class="form-row">
+                                   <input type="submit" name="myButton" class="theme-btn btn-style-one" onclick="disdate(); return confirm('Kindly press Ok to submit order and please wait for the confirmation page.')" value="Place Order"></button>
+                               </div>
+        
+              </form></div></div>
+
           <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
           <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
           <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
@@ -136,23 +221,6 @@
       
        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
         <div id="preloader"></div>
-      
-        <!-- Vendor JS Files -->
-        <script src="assets/vendor/jquery/jquery.min.js"></script>
-        <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-        <script src="assets/vendor/php-email-form/validate.js"></script>
-        <script src="assets/vendor/appear/jquery.appear.js"></script>
-        <script src="assets/vendor/knob/jquery.knob.js"></script>
-        <script src="assets/vendor/parallax/parallax.js"></script>
-        <script src="assets/vendor/wow/wow.min.js"></script>
-        <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-        <script src="assets/vendor/nivo-slider/js/jquery.nivo.slider.js"></script>
-        <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-        <script src="assets/vendor/venobox/venobox.min.js"></script>
-      
-        <!-- Template Main JS File -->
-        <script src="assets/js/main.js"></script>
-      
-      </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+      </body>
       </html>

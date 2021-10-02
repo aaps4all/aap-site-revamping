@@ -29,7 +29,67 @@
         <!-- Main Style Css -->
             <link href="assets/css/style_order_online.css" rel="stylesheet">
            <link href="assets/css/style.css" rel="stylesheet">
-             
+            
+           
+
+<!-- Javascipt changes which handles the time format as per delivery-->
+<script language="javascript" type="text/javascript">
+  function disdate()
+  {
+  var today = new Date(); 
+  var hours = today.getHours();
+  var min = today.getMinutes();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; 
+  var yyyy = today.getFullYear();
+  if(dd<10) 
+  {
+      dd='0'+dd;
+  } 
+  
+  if(mm<10) 
+  {
+      mm='0'+mm;
+  } 
+  today = yyyy+'-'+mm+'-'+dd;
+  
+  ordertime = hours+''+min;
+  
+  
+  var form = document.getElementById('orderform');
+  var dateenter = form.elements.startdate.value;
+  
+  if(dateenter == today){
+  if (ordertime < "07"){
+  //alert('1');    //document.getElementById("r2").checked = true;
+     // document.getElementById("r3").checked = true;
+     // document.getElementById("r1").checked = true;
+  } else if (hours >= "07" && hours < "10") {
+    //  alert('2');
+      document.getElementById("r1").disabled = true;
+      //document.getElementById("r2").checked = true;
+      //document.getElementById("r3").checked = true;
+  } else if (hours >= "10" && hours < "16") {
+  //  alert('3');
+      document.getElementById("r1").disabled = true;
+      document.getElementById("r2").disabled = true;
+      //document.getElementById("r3").checked = true;
+  }
+  else if (hours >= "16") {
+    //  alert('4');
+     document.getElementById("r1").disabled = true;
+      document.getElementById("r2").disabled = true;
+      document.getElementById("r3").disabled = true;
+  }
+  }
+  else if (dateenter != today){
+      document.getElementById("r1").disabled = false;
+      document.getElementById("r2").disabled = false;
+      document.getElementById("r3").disabled = false; 
+  }
+  }
+  </script>
+
     </head>
 
     <body class="form-v4" data-spy="scroll" data-target="#navbar-example">
@@ -103,6 +163,31 @@
       
       
                                      
+
+
+
+
+
+                                      
+         
+                                         <div class="form-group">
+                   <div class="form-row form-row-1">
+                                         <label for="radio-01">Delivery time</label>
+         </div>
+         
+                   <div class="form-row form-row-1 ">
+                                             <input name="entry.1359905200" id="r1" type="radio"  value = "9 AM - 10 AM" required/> 9 - 10 AM 
+         </div>
+         
+                   <div class="form-row form-row-1 ">
+         
+                                             <input name="entry.1359905200" id= "r2" type="radio"  value = "1 PM - 2 PM" required /> 12 - 1 PM 
+         </div>
+                   <div class="form-row form-row-1 ">
+                                             <input name="entry.1359905200" id = "r3" type="radio"  value = "6 PM - 7 PM" required/> 6 - 7 PM </br>
+         </div>
+         <input type="hidden" name="entry.1359905200"/>
+          </div>
       
                                      
 
